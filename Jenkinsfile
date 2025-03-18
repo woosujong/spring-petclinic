@@ -5,6 +5,10 @@ pipeline {
         maven "M3"
         jdk "JDK17"
     }
+
+    environment{
+        DOCKERHUB_CREDENTIALS = credentials('dockercredential')    
+    }
     
     stages {
         stage('Git clone') {
@@ -39,6 +43,13 @@ pipeline {
                         docker tag spring-petclinic:$BUILD_NUMBER woosujong/spring-petclinic.latest
                         '''
                 }
+        // Docker Image Push
+        stage('Docker Image Push') {
+            steps {
+                sh '''
+                echo DOCKERHUB_CREDENTIALS_PSW | docker login -u DOCKERHUB_CREDENTIALS_USR --password-stdin
+                docker push woosujong/spring-petclinic:latest
+                '''
             }
         }
         stage('SSH Publish') {
