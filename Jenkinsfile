@@ -57,7 +57,7 @@ pipeline {
         stage('SSH Publish') {
             steps {
                 echo 'SSH Publish'
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'target',
+                sshPublisher(publishers: [sshPublisherDesc(configName: 'target', 
                 transfers: [sshTransfer(cleanRemote: false, excludes: '', 
                 execCommand: '''
                 docker rm -f $(docker ps -aq)
@@ -66,12 +66,12 @@ pipeline {
                 ''',
                 execTimeout: 120000, 
                 flatten: false, 
-                makeEmptyDirs: false,
+                makeEmptyDirs: false, 
                 noDefaultExcludes: false, 
-                patternSeparator: '[, ]+',
+                patternSeparator: '[, ]+', 
                 remoteDirectory: '', 
-                remoteDirectorySDF: false,
-                removePrefix: 'target',
+                remoteDirectorySDF: false, 
+                removePrefix: 'target', 
                 sourceFiles: 'target/*.jar')], 
                 usePromotionTimestamp: false, 
                 useWorkspaceInPromotion: false, verbose: false)])
