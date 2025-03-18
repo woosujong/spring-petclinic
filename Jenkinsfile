@@ -43,6 +43,8 @@ pipeline {
                         docker tag spring-petclinic:$BUILD_NUMBER woosujong/spring-petclinic.latest
                         '''
                 }
+            }
+        }
         // Docker Image Push
         stage('Docker Image Push') {
             steps {
